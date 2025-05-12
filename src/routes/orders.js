@@ -114,15 +114,15 @@ router.post('/get-order-details', (req, res) => {
     }
     
     // Build conversational response
-    const conversationalResponse = `Your order #${order.orderCode} for ${order.customerName} at the ${order.projectName} project ${statusDescription}. This order is for ${order.ordrqy.toFixed(2)} cubic meters of ${order.prddes1}. So far, ${order.ticketedQty.toFixed(2)} cubic meters (${deliveredPercentage}%) have been delivered, with ${remainingQty} cubic meters remaining. ${deliveryNarrative}`;
+    const conversationalResponse = `Your order ${order.orderCode} for ${order.customerName} at the ${order.projectName} project ${statusDescription}. This order is for ${order.ordrqy.toFixed(2)} cubic meters of ${order.prddes1}. So far, ${order.ticketedQty.toFixed(2)} cubic meters (${deliveredPercentage}%) have been delivered, with ${remainingQty} cubic meters remaining. ${deliveryNarrative}`;
     
     // Create alternate phrasings for variety
     const alternativePhrasings = [
-      `I found order #${order.orderCode} for the ${order.projectName} project. This is for ${order.ordrqy.toFixed(2)} cubic meters of ${order.prddes1}. Currently, ${deliveredPercentage}% has been delivered (${order.ticketedQty.toFixed(2)} cubic meters), with ${remainingQty} cubic meters remaining. The order ${statusDescription} and ${order.deliverystatus.toLowerCase()}.`,
+      `I found order ${order.orderCode} for the ${order.projectName} project. This is for ${order.ordrqy.toFixed(2)} cubic meters of ${order.prddes1}. Currently, ${deliveredPercentage}% has been delivered (${order.ticketedQty.toFixed(2)} cubic meters), with ${remainingQty} cubic meters remaining. The order ${statusDescription} and ${order.deliverystatus.toLowerCase()}.`,
       
-      `For the ${order.projectName} project, order #${order.orderCode} ${statusDescription}. You ordered ${order.ordrqy.toFixed(2)} cubic meters of ${order.prddes1}, and we've delivered ${order.ticketedQty.toFixed(2)} cubic meters so far. That's ${deliveredPercentage}% complete with ${remainingQty} cubic meters still to come. ${deliveryNarrative}`,
+      `For the ${order.projectName} project, order ${order.orderCode} ${statusDescription}. You ordered ${order.ordrqy.toFixed(2)} cubic meters of ${order.prddes1}, and we've delivered ${order.ticketedQty.toFixed(2)} cubic meters so far. That's ${deliveredPercentage}% complete with ${remainingQty} cubic meters still to come. ${deliveryNarrative}`,
       
-      `The ${order.projectName} order (#${order.orderCode}) is ${order.deliverystatus.toLowerCase()} and ${statusDescription}. Of the ${order.ordrqy.toFixed(2)} cubic meters of ${order.prddes1} ordered, ${order.ticketedQty.toFixed(2)} cubic meters have been delivered, leaving ${remainingQty} cubic meters remaining. The materials are being supplied from ${order.supplyQuarryList_Name}.`
+      `The ${order.projectName} order (${order.orderCode}) is ${order.deliverystatus.toLowerCase()} and ${statusDescription}. Of the ${order.ordrqy.toFixed(2)} cubic meters of ${order.prddes1} ordered, ${order.ticketedQty.toFixed(2)} cubic meters have been delivered, leaving ${remainingQty} cubic meters remaining. The materials are being supplied from ${order.supplyQuarryList_Name}.`
     ];
     
     // Create response with multiple versions for the LLM to choose from
