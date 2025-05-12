@@ -1,0 +1,86 @@
+{
+    "function_definition": {
+        "type": "function",
+        "async": false,
+        "function": {
+            "name": "EditOrder",
+            "parameters": {
+                "type": "object",
+                "required": [
+                    "order_code",
+                    "request_type",
+                    "quantity"
+                ],
+                "properties": {
+                    "order_code": {
+                        "type": "integer",
+                        "description": "The numeric order code for the order (e.g. 7051, 7093)"
+                    },
+                    "request_type": {
+                        "type": "string",
+                        "enum": [
+                            "add_quantity",
+                            "remove_quantity"
+                        ],
+                        "description": "Specifies whether to add or remove quantity from the order"
+                    },
+                    "quantity": {
+                        "type": "number",
+                        "description": "The amount to add or remove from the current order, in cubic meters (m³)"
+                    }
+                }
+            },
+            "description": "Adjusts the quantity of an existing order by adding or removing cubic meters of material."
+        }
+    },
+    "conversation_steps": {
+        "steps": [
+            {
+                "title": "Ask for Order Code",
+                "action": "Ask the caller for their Order Code (e.g. 7051, 7093)",
+                "wait_for_response": true
+            },
+            {
+                "title": "Determine Request Type",
+                "action": "Ask the caller if they want to add to or reduce their order quantity, and assign 'add_quantity' or 'remove_quantity' to the request_type field accordingly",
+                "wait_for_response": true
+            },
+            {
+                "title": "Collect Quantity",
+                "action": "Ask how many cubic meters they want to add or remove from their order",
+                "wait_for_response": true
+            },
+            {
+                "title": "Confirm Details",
+                "action": "Confirm all details with the caller before proceeding with the edit",
+                "wait_for_response": true
+            }
+        ],
+        "title": "Edit Order Quantity",
+        "description": "Gather information from the caller to modify their order by adding or removing quantity in cubic meters."
+    },
+    "example_function_call": {
+        "call_id": "generated_call_id_123",
+        "arguments": {
+            "order_code": 7051,
+            "request_type": "add_quantity",
+            "quantity": 50
+        }
+    },
+    "example_response": {
+        "call_id": "generated_call_id_123",
+        "result": {
+            "message": "Order 7051 has been updated successfully.",
+            "order": {
+                "id": 1,
+                "customerName": "Ulan Mobile #1 NSW Concrete",
+                "orderCode": 7051,
+                "ordrqy": 550.0,
+                "ticketedQty": 174.23,
+                "prddes1": "20/14mm BLENDED AGGREGATE",
+                "orderStatus": "Normal",
+                "deliverystatus": "In Transit"
+            }
+        }
+    }
+}

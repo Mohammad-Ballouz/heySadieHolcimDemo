@@ -1,0 +1,70 @@
+{
+    "function_definition": {
+        "type": "function",
+        "async": false,
+        "function": {
+            "name": "GetOrderDetails",
+            "parameters": {
+                "type": "object",
+                "required": [
+                    "order_code"
+                ],
+                "properties": {
+                    "order_code": {
+                        "type": "integer",
+                        "description": "The numeric order code for the order (e.g. 7051, 7093)"
+                    }
+                }
+            },
+            "description": "Gets detailed information about an order by its order code in a conversational format that can be directly spoken to the customer."
+        }
+    },
+    "conversation_steps": {
+        "steps": [
+            {
+                "title": "Ask for Order Code",
+                "action": "Ask the caller for their Order Code (e.g. 7051, 7093)",
+                "wait_for_response": true
+            },
+            {
+                "title": "Verify Order Code",
+                "action": "Verify that the provided order code is a valid number",
+                "wait_for_response": false
+            }
+        ],
+        "title": "Get Order Details",
+        "description": "Retrieve information about an order to provide customer-friendly details to the caller."
+    },
+    "example_function_call": {
+        "call_id": "get_details_123",
+        "arguments": {
+            "order_code": 7051
+        }
+    },
+    "example_response": {
+        "call_id": "get_details_123",
+        "result": {
+            "success": true,
+            "order": {
+                "orderCode": 7051,
+                "customer": "Ulan Mobile #1 NSW Concrete",
+                "project": "10 TOOLE RD",
+                "product": "20/14mm BLENDED AGGREGATE",
+                "orderedQuantity": 500,
+                "deliveredQuantity": 174.23,
+                "remainingQuantity": "325.77",
+                "deliveryStatus": "In Transit",
+                "orderStatus": "Normal"
+            },
+            "humanResponse": {
+                "primary": "Your order #7051 for Ulan Mobile #1 NSW Concrete at the 10 TOOLE RD project is progressing normally. This order is for 500.00 cubic meters of 20/14mm BLENDED AGGREGATE. So far, 174.23 cubic meters (35%) have been delivered, with 325.77 cubic meters remaining. Your delivery is currently in transit from Dubbo Quarry to Lot 10 Toole Road.",
+                "alternatives": [
+                    "I found order #7051 for the 10 TOOLE RD project. This is for 500.00 cubic meters of 20/14mm BLENDED AGGREGATE. Currently, 35% has been delivered (174.23 cubic meters), with 325.77 cubic meters remaining. The order is progressing normally and in transit.",
+                    "For the 10 TOOLE RD project, order #7051 is progressing normally. You ordered 500.00 cubic meters of 20/14mm BLENDED AGGREGATE, and we've delivered 174.23 cubic meters so far. That's 35% complete with 325.77 cubic meters still to come. Your delivery is currently in transit from Dubbo Quarry to Lot 10 Toole Road.",
+                    "The 10 TOOLE RD order (#7051) is in transit and is progressing normally. Of the 500.00 cubic meters of 20/14mm BLENDED AGGREGATE ordered, 174.23 cubic meters have been delivered, leaving 325.77 cubic meters remaining. The materials are being supplied from Dubbo Quarry."
+                ]
+            }
+        }
+    },
+    "example_llm_response": "Thanks for providing your order number. I've found your order information. Your order #7051 for the 10 TOOLE RD project is progressing normally. You ordered 500 cubic meters of 20/14mm BLENDED AGGREGATE, and we've delivered 174.23 cubic meters so far. That's 35% complete with 325.77 cubic meters still to come. Your delivery is currently in transit from Dubbo Quarry to Lot 10 Toole Road. Is there anything specific about this order you'd like to know more about?"
+}

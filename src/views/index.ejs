@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Holcim Order Management Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <nav class="navbar navbar-dark">
+        <div class="container-fluid">
+            <span class="navbar-brand mb-0 h1">
+                <img src="/img/holcim-logo.png" alt="Holcim Logo" height="40" class="d-inline-block align-text-top me-2">
+                Order Management Portal
+            </span>
+            <div class="d-flex gap-2">
+                <button id="refreshBtn" class="btn btn-outline-light">
+                    <i class="fas fa-sync-alt me-2"></i>
+                    Refresh
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0"><i class="fas fa-edit me-2"></i>Update Order Quantity</h5>
+                    </div>
+                    <div class="card-body">
+                        <form id="editOrderForm">
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <label for="orderCode" class="form-label">Order Code</label>
+                                    <select id="orderCode" name="order_code" class="form-select" required>
+                                        <option value="" disabled selected>Select Order Code</option>
+                                        <!-- Order codes will be loaded here -->
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="requestType" class="form-label">Request Type</label>
+                                    <select id="requestType" name="request_type" class="form-select" required>
+                                        <option value="" disabled selected>Select Action</option>
+                                        <option value="add_quantity">Add Quantity</option>
+                                        <option value="remove_quantity">Remove Quantity</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="quantity" class="form-label">Quantity (m³)</label>
+                                    <input type="number" class="form-control" id="quantity" name="quantity" min="0.01" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="d-grid mt-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i>Update Order
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="fas fa-list me-2"></i>Orders List</h5>
+                        <span class="badge bg-primary rounded-pill" id="orderCount">0 Orders</span>
+                    </div>
+                    <div class="card-body p-3">
+                        <div id="orders-loading" class="text-center py-5">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-3">Loading orders...</p>
+                        </div>
+                        <div id="orders-empty" class="text-center py-5 d-none">
+                            <i class="fas fa-info-circle fa-2x text-muted mb-3"></i>
+                            <p>No orders found. Add some orders to get started.</p>
+                        </div>
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4" id="ordersContainer">
+                            <!-- Orders will be loaded here as cards -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast notifications -->
+        <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div id="toast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header" id="toastHeader">
+                    <i class="fas fa-bell me-2"></i>
+                    <strong class="me-auto" id="toastTitle">Notification</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body" id="toastMessage">
+                    <!-- Toast message will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-white text-center py-3">
+        <div class="container">
+            <p class="mb-0">© 2024 Holcim Order Management Demo | <i class="fas fa-code"></i> with <i class="fas fa-heart text-danger"></i></p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/scripts.js"></script>
+</body>
+</html> 
